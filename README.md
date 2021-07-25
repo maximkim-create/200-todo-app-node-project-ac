@@ -117,7 +117,7 @@ http://ec2-xxxxxxxx.compute-1.amazonaws.com:8080/github-webhook/
 - Put a checkmark on `GitHub Project` under `General` section, enter URL of the project repository.
 
 ```text
-https://github.com/xxxxxxxx/todo-app-node-project.git
+https://github.com/maximkim-create/200-todo-app-node-project-ac.git
 ```
 
 - Put a checkmark on `GitHub hook trigger for GITScm polling` under `Build Triggers` section.
@@ -129,7 +129,7 @@ https://github.com/xxxxxxxx/todo-app-node-project.git
 - Enter URL of the project repository, and let others be default.
 
 ```text
-https://github.com/xxxxxxxxxxx/todo-app-node-project.git
+https://github.com/maximkim-create/200-todo-app-node-project-ac.git
 ```
 
 - Click `apply` and `save`. Note that the script `Jenkinsfile` should be placed under root folder of repo.
@@ -203,7 +203,7 @@ Press "i" to edit
 pipeline {
     agent { label "master" }
     environment {
-        ECR_REGISTRY = "<aws_account_id>.dkr.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "782349758377.dkr.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway-repo/todo-app"
     }
     stages {
