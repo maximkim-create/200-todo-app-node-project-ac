@@ -1,28 +1,3 @@
-# Hands-on ECR-02 : Jenkins Pipeline to Push Docker Images to ECR
-
-Purpose of the this hands-on training is to teach the students how to build Jenkins pipeline to create Docker image and push the image to AWS Elastic Container Registry (ECR) on Amazon Linux 2 EC2 instance.
-
-## Learning Outcomes
-
-At the end of the this hands-on training, students will be able to;
-
-- create and configure AWS ECR from the AWS Management Console.
-
-- configure Jenkins Server with Git, Docker, AWS CLI on Amazon Linux 2 EC2 instance using Cloudformation Service.
-
-- demonstrate how to build a docker image with Dockerfile.
-
-- build Jenkins pipelines with Jenkinsfile.
-
-- integrate Jenkins pipelines with GitHub using Webhook.
-
-- configure Jenkins Pipeline to build a NodeJS project.
-
-- use Docker commands effectively to tag, push, and pull images to/from ECR.
-
-- create repositories on ECR from the AWS Management Console.
-
-- delete images and repositories on ECR from the AWS CLI.
 
 ## Outline
 
@@ -58,7 +33,7 @@ At the end of the this hands-on training, students will be able to;
 - Connect to the "Jenkins server" instance with ssh and get "sudo privileges"
 
 ```bash
-ssh -i .ssh/xxxxx.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazonaws.com
+ssh -i .ssh/Second.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazonaws.com
 sudo su
 ```
 
@@ -126,7 +101,7 @@ Add "token" after "//" in the "url" part . And also paste "@" at the and of the 
 - Copy the Jenkins URL from the AWS Management Console, paste it into `Payload URL` field, add `/github-webhook/` at the end of URL, and click on `Add webhook`.
 
 ```text
-http://ec2-54-144-151-76.compute-1.amazonaws.com:8080/github-webhook/
+http://ec2-xxxxxxxx.compute-1.amazonaws.com:8080/github-webhook/
 ```
 
 ## Part 3 - Creating Jenkins Pipeline for the Project with GitHub Webhook
@@ -306,13 +281,13 @@ git push
 -if you want to manually run 
 
 ```bash
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 782349758377.dkr.ecr.us-east-1.amazonaws.com
 ```
 
 - Then run the image
 
 ```bash
-docker run --name todo -dp 80:3000 <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/todo-app:latest
+docker run --name todo -dp 80:3000 782349758377.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/todo-app:latest
 ```
 - Delete the container 
 
@@ -341,7 +316,7 @@ Press "i" to edit
   pipeline {
     agent { label "master" }
     environment {
-        ECR_REGISTRY = "<aws_account_id>.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "782349758377.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway-repo/todo-app"
     }
     stages {
@@ -447,7 +422,7 @@ aws ecr delete-repository \
 <!-- pipeline {
     agent { label "master" }
     environment {
-        ECR_REGISTRY = "046402772087.dkr.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "782349758377.dkr.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway/to-do-app"
         PATH="/usr/local/bin/:${env.PATH}"
     }
